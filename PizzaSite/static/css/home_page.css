@@ -1,0 +1,43 @@
+html {
+    font-size: 20px;
+    scroll-behavior: smooth;
+}
+
+.card-img-top {
+    object-fit: cover;
+    height: 200px;
+}
+
+.card {
+    animation: fade-in .4s ease;
+    width: 300px;
+    transition: 0.3s all ease-in-out;
+}
+
+.btn-primary {
+    background: #7b7b7b !important;
+    border: none !important;
+    transition: 0.3s all ease-in-out;
+}
+
+.btn-primary:hover {
+    background: #7ec56b !important;
+}
+
+.card-text {
+    height: 62px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
