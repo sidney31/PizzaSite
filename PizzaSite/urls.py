@@ -6,7 +6,8 @@ from wagtail import urls as wagtail_urls
 
 urlpatterns = [
     path("admin/", include(wagtailadmin_urls)),
-    path("", include("dish.urls")),
+    path("", include("home.urls")),
+    path("dish/", include("dish.urls")),
 ]
 
 
