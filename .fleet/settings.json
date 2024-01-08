@@ -1,0 +1,9 @@
+{
+    "plugins": [
+        {
+            "type": "add",
+            "pluginName": "fleet.python"
+        }
+    ],
+    "backend.maxHeapSizeMb": 1487
+}
