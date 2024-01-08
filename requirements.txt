@@ -1,2 +1,4 @@
 Django>=4.2,<5.1
 wagtail>=5.2,<5.3
+
+transliterate~=1.10.2
