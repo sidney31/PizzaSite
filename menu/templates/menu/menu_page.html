@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load wagtailimages_tags wagtailcore_tags %}
+
+{% block header %}
+   {% for item in header %}
+   	    <li><a href="{% pageurl item.page %}" class="bold nav-link me-2 text">{{item.title}}</a></li>
+   {% endfor %}
+{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                {% for dish in dishes %}
+                    <div class="col-xl-4 col-lg-6 col-md-12 d-flex justify-content-center"
+                         onclick="document.location.href='{{ dish.get_absolute_url }}'">
+                        <div class="card my-3" style="width: 18rem;">
+                            {% image dish.image original as image %}
+                            <div class="card-img-top">
+                                <img src="{{ image.url }}" alt="{{ dish.name }}">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title fs-4">{{ dish.price }} ₽</h5>
+                                <b class="card-subtitle">{{ dish.name }}</b>
+                                <p class="card-text">{{ dish.description }}</p>
+                                <a href="#" class="w-100 btn btn-buy">Добавить</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

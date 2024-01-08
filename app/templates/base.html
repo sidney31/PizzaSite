@@ -1,0 +1,40 @@
+{% load static %}
+{% load wagtailcore_tags  %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static '/css/menu_page.css' %}">
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+
+<header class="p-2 text-white fade-navbar fixed-top">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                {% block header %} {% endblock %}
+            </ul>
+
+            <button class="btn text-end nav-link text-white">
+                <a class="bold d-flex flex-direction-row gap-2 text-white basket-button text-decoration-none ">
+                    <p class="m-0">Заказ</p>
+                    <div class="bi bi-bag"></div>
+                </a>
+            </button>
+        </div>
+    </div>
+</header>
+
+{% block content %} {% endblock %}
+
+<script type="text/javascript" src="{% static '/js/bootstrap.bundle.min.js' %}"></script>
+<script type="text/javascript" src="{% static '/js/index.js' %}"></script>
+
+</body>
+</html>

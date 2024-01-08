@@ -1,15 +1,17 @@
 from django.db import models
-from django.utils.text import slugify
-from django.urls import reverse
 
-from wagtail.models import Page
+from django.db import models
+from django.urls import reverse
+from django.utils.text import slugify
+
 from wagtail.admin.panels import FieldPanel
+from wagtail.models import Page
 from wagtail.snippets.models import register_snippet
 
-from transliterate import translit, get_available_language_codes
+from transliterate import translit
 
 
-class PizzaPage(Page):
+class DishPage(Page):
     pass
 
 
@@ -49,3 +51,4 @@ class Pizza(models.Model):
     class Meta:
         verbose_name = 'Пицца'
         verbose_name_plural = 'Пиццы'
+        
