@@ -3,7 +3,9 @@ from django.db import models
 
 from wagtail.admin.panels import (FieldPanel, 
                                   PageChooserPanel, 
-                                  InlinePanel)
+                                  InlinePanel,
+                                  MultiFieldPanel,
+                                  HelpPanel)
 from wagtail.models import Page, Orderable
 from wagtail.snippets.models import register_snippet
 
@@ -15,7 +17,9 @@ class MenuPage(Page):
 
 
 class LinkTextMixin(models.Model):
-    title = models.CharField(max_length=20, blank=True, null=True,)
+    title = models.CharField(max_length=20,
+                             blank=False, 
+                             null=True)
     page = models.ForeignKey('wagtailcore.Page',
                              blank=True,
                              null=True,
@@ -42,9 +46,13 @@ class ItemOfHeader(LinkTextMixin, ClusterableModel):
                             choices=TypeChoice.choices, 
                             default=TypeChoice.LINK)
 
-    panels = LinkTextMixin.panels + [
+    panels = [
+        LinkTextMixin.panels[0],
         FieldPanel('type', widget=forms.Select),
-        InlinePanel('drop_down_item'),
+        LinkTextMixin.panels[1],
+        MultiFieldPanel([
+            InlinePanel('drop_down_item'),
+        ], heading = 'Items'),
     ]
 
     class Meta:
