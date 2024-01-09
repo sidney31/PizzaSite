@@ -1,9 +1,9 @@
 # PizzaSite
 
-![image1](https://github.com/sidney31/PizzaSite/assets/100060433/94614127-02ba-4df6-8f45-9996a582b11f)
+![1](https://github.com/sidney31/PizzaSite/assets/100060433/7e763196-42fe-48bc-86e2-9db070ab319e)
 
-![image2](https://github.com/sidney31/PizzaSite/assets/100060433/21c1f683-b09a-4dd4-9d4d-7a23cf0d498e)
+![2](https://github.com/sidney31/PizzaSite/assets/100060433/c1ac81ee-f1c3-4022-a155-18e72a07b6de)
 
-![image3](https://github.com/sidney31/PizzaSite/assets/100060433/f1b353e1-ae0a-4f73-838a-be78740185aa)
+![3](https://github.com/sidney31/PizzaSite/assets/100060433/096b4c3e-2f21-4ce9-8caf-439ed2583357)
 
-![image4](https://github.com/sidney31/PizzaSite/assets/100060433/569e9c44-5421-4fc1-9f7e-8c2740f78607)
+![4](https://github.com/sidney31/PizzaSite/assets/100060433/1268e2ac-b498-4bf7-b973-79d12df8c25c)
