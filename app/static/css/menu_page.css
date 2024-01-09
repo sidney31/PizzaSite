@@ -93,3 +93,22 @@ header {
         opacity: 1;
     }
 }
+
+@keyframes fade-up {
+    0% {
+        transform: translateY(-25px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.dropdown-menu{
+    animation: fade-up .15s ease;
+}
+
+.dropdown:hover .dropdown-menu{
+    display: block;
+} 

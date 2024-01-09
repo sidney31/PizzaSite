@@ -2,9 +2,25 @@
 {% load wagtailimages_tags wagtailcore_tags %}
 
 {% block header %}
-   {% for item in header %}
-   	    <li><a href="{% pageurl item.page %}" class="bold nav-link me-2 text">{{item.title}}</a></li>
-   {% endfor %}
+    {% for item in header %}
+        {% if item.type == 'L' %}
+   	        <li><a href="{% pageurl item.page %}" class="bold nav-link me-2 text">{{item.title}}</a></li>
+        {% elif item.type == 'D' %}
+            <div class="dropdown">
+                <a class='text-decoration-none'>
+                    <p class="bold nav-link me-2 mb-0 text">
+                        {{item.title}}
+                        <i class="bi bi-caret-down dropdown-down"></i>
+                    </p>
+                </a>
+                <ul class="dropdown-menu">
+                    {% for item in item.drop_down_item.all %}
+                        <li><a class="dropdown-item" href="{% pageurl item.page %}">{{item.title}}</a></li>
+                    {% endfor %}
+                </ul>
+              </div>
+        {% endif %}
+    {% endfor %}
 {% endblock %}
 
 {% block content %}
