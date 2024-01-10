@@ -16,11 +16,23 @@ class DishPage(Page):
 
 
 @register_snippet
-class Pizza(models.Model):
+class Category(models.Model):
     name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
+
+
+@register_snippet
+class Dish(models.Model):
+    name = models.CharField(max_length=255)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='+', null=False, blank=False)
     slug = models.SlugField(max_length=255, unique=True, db_index=True)
     description = models.CharField(max_length=255)
-    size = models.IntegerField()
     price = models.DecimalField(max_digits=5, decimal_places=2)
     image = models.ForeignKey(
         'wagtailimages.Image',
@@ -32,8 +44,8 @@ class Pizza(models.Model):
 
     panels = [
         FieldPanel('name'),
+        FieldPanel('category'),
         FieldPanel('description'),
-        FieldPanel('size'),
         FieldPanel('price'),
         FieldPanel('image'),
     ]
@@ -49,6 +61,6 @@ class Pizza(models.Model):
         return reverse('dish', kwargs={'dish_slug': self.slug})
 
     class Meta:
-        verbose_name = 'Пицца'
-        verbose_name_plural = 'Пиццы'
+        verbose_name = 'Блюдо'
+        verbose_name_plural = 'Блюда'
         

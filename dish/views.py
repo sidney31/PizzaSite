@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Pizza
+from .models import Dish
 
 
 def index(request):
@@ -7,8 +7,8 @@ def index(request):
 
 
 def get_dish_info(request, dish_slug):
-    pizza = get_object_or_404(Pizza, slug=dish_slug)
+    dishes = get_object_or_404(Dish, slug=dish_slug)
     context = {
-        'pizza': pizza,
+        'dishes': dishes,
     }
     return render(request, 'dish/dish_page.html', context)
