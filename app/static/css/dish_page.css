@@ -1,5 +1,27 @@
-.square-image{
-    height: 500px;
-    width: 500px;
-    object-fit: cover;
+.square-image {
+    aspect-ratio: 1 / 1;
+    height: auto;
+    max-width: 500px;
+    border-radius: 15px;
+    margin: 10px;
+}
+
+#backToMenu {
+    padding: 20px;
+}
+
+@media (max-width: 576px) {
+    .content {
+        margin: 0 !important;
+        border-radius: 0 !important;
+    }
+
+    #backToMenu {
+        position: relative;
+        margin: 0;
+    }
+
+    .square-image {
+        max-width: 95%;
+    }
 }
