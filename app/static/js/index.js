@@ -13,6 +13,7 @@ if (document.querySelector("header")) {
     });
 }
 
+//dropdown for mobile
 if (window.matchMedia("(max-width: 992px)").matches) {
     let dropDown = document.querySelectorAll('.dropdown')
     dropDown.forEach(e => {

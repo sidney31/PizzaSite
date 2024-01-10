@@ -1,5 +1,6 @@
-.square-image{
-    height: 500px;
-    width: 500px;
-    object-fit: cover;
+.square-image {
+    aspect-ratio: 1 / 1;
+    height: auto;
+    max-width: 500px;
+    border-radius: 15px;
 }
