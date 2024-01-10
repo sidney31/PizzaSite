@@ -1,6 +1,7 @@
 from django.db import models
 
 from django.db import models
+from django.db.models import Q
 from django.urls import reverse
 from django.utils.text import slugify
 
@@ -18,6 +19,9 @@ class DishPage(Page):
 @register_snippet
 class Category(models.Model):
     name = models.CharField(max_length=255)
+
+    def get_dish_list(self):
+        return Dish.objects.filter(category=self)
 
     def __str__(self):
         return self.name

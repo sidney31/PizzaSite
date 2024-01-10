@@ -1,7 +1,8 @@
 html * {
     font-size: 20px;
+    --main-color: #197C37;
     scroll-behavior: smooth;
-    color: #2E3138!important;
+    color: #2E3138 !important;
 }
 
 img {
@@ -24,11 +25,11 @@ img {
 }
 
 .card {
-    animation: fade-in .3s ease-in-out;
+    animation: fade-in .3s ease-in;
     width: 300px;
     transition: .3s all ease-in-out;
     border: none !important;
-    border-radius: 15px!important;
+    border-radius: 15px !important;
     background: red;
     overflow: hidden;
 }
@@ -45,15 +46,15 @@ img {
 
 .btn-buy {
     transition: .3s all ease-in-out;
-    background: none!important;
-    border: 1px solid #197C37!important;
-    border-radius: 10px!important;
-    font-weight: 500!important;
+    background: none !important;
+    border: 1px solid var(--main-color) !important;
+    border-radius: 10px !important;
+    font-weight: 500 !important;
 }
 
 .btn-buy:hover {
-    background: #197C37 !important;
-    color: white!important;
+    background: var(--main-color) !important;
+    color: white !important;
 }
 
 .card-text {
@@ -65,12 +66,12 @@ img {
     -webkit-box-orient: vertical;
 }
 
-.fade-navbar{
+.fade-navbar {
     transition: .3s all ease-in-out;
 }
 
 header {
-    background-color: white!important;
+    background-color: white !important;
 }
 
 .bold {
@@ -105,10 +106,34 @@ header {
     }
 }
 
-.dropdown-menu{
+.dropdown-menu {
     animation: fade-up .15s ease;
 }
 
-.dropdown:hover .dropdown-menu{
+.dropdown:hover .dropdown-menu {
     display: block;
-} 
+}
+
+.hover-decoration {
+    text-decoration-style: solid;
+    text-decoration-thickness: 2px;
+    text-decoration-color: rgba(0, 0, 0, 0);
+}
+
+.hover-decoration:hover {
+    text-decoration-color: black;
+}
+
+.anchor-hash {
+    opacity: 0;
+}
+
+.pseudo-anchor:hover + .anchor-hash {
+    opacity: 1;
+}
+
+.anchor{
+    position: relative;
+    top: -100px;
+    visibility: hidden;
+}
