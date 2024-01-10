@@ -2,7 +2,6 @@
 {% load wagtailimages_tags wagtailcore_tags %}
 
 {% block header %}
-
     <div class="dropdown">
         <a class='text-decoration-none'>
             <p class="bold nav-link me-2 mb-0 text">
@@ -65,7 +64,8 @@
                                     {% if image %}
                                         <img src="{{ image.url }}" alt="{{ dish.name }}">
                                     {% else %}
-                                        <p class="text-center bold position-relative top-50 translate-middle-y">Изображение отсутствует</p>
+                                        <p class="text-center bold position-relative top-50 translate-middle-y">
+                                            Изображение отсутствует</p>
                                     {% endif %}
                                 </div>
                                 <div class="card-body">

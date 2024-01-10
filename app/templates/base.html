@@ -1,5 +1,5 @@
 {% load static %}
-{% load wagtailcore_tags  %}
+{% load wagtailcore_tags %}
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -14,22 +14,25 @@
 </head>
 <body>
 
-<header class="p-2 text-white fade-navbar fixed-top">
-    <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+<nav class="navbar navbar-expand-lg fade-navbar fixed-top">
+    <div class="container-lg flex-row-reverse">
+        <button class="btn text-end nav-link text-white">
+            <a class="bold d-flex flex-direction-row gap-2 text-white basket-button text-decoration-none ">
+                <p class="m-0">Заказ</p>
+                <div class="bi bi-bag"></div>
+            </a>
+        </button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Переключатель навигации">
+            <i class="bi bi-list"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
                 {% block header %} {% endblock %}
             </ul>
-
-            <button class="btn text-end nav-link text-white">
-                <a class="bold d-flex flex-direction-row gap-2 text-white basket-button text-decoration-none ">
-                    <p class="m-0">Заказ</p>
-                    <div class="bi bi-bag"></div>
-                </a>
-            </button>
         </div>
     </div>
-</header>
+</nav>
 
 {% block content %} {% endblock %}
 
