@@ -56,16 +56,18 @@
                     </p>
 
                     {% for dish in category.get_dish_list %}
-                        <div class="col-xl-4 col-md-6 d-flex justify-content-center"#}
-                             onclick="document.location.href='{{ dish.get_absolute_url }}'">
+                        <div class="col-xl-4 col-md-6 d-flex justify-content-center">
                             <div class="card my-3" style="width: 18rem;">
+                                <div class="h-85 position-absolute w-100"
+                                     onclick="document.location.href='{{ dish.get_absolute_url }}'"></div>
                                 <div class="card-img-top">
                                     {% image dish.image original as image %}
                                     {% if image %}
                                         <img src="{{ image.url }}" alt="{{ dish.name }}">
                                     {% else %}
-                                        <p class="text-center bold position-relative top-50 translate-middle-y">
-                                            Изображение отсутствует</p>
+                                        <p class="text-center bold position-relative top-50 translate-middle-y m-0">
+                                            Изображение отсутствует
+                                        </p>
                                     {% endif %}
                                 </div>
                                 <div class="card-body">

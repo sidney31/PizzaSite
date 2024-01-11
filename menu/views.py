@@ -9,3 +9,4 @@ def index(request):
         'header': ItemOfHeader.objects.all(),
     }
     return render(request, 'menu/menu_page.html', context)
+

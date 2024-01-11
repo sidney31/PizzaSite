@@ -22,6 +22,7 @@ img {
 .card-img-top {
     height: 200px;
     overflow: hidden;
+    background: #f6f6f6;
 }
 
 .card {
@@ -136,4 +137,8 @@ img {
     position: relative;
     top: -75px;
     visibility: hidden;
+}
+
+.h-85{
+    height: 85%;
 }
