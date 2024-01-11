@@ -19,12 +19,8 @@ if (window.matchMedia("(max-width: 992px)").matches) {
     dropDown.forEach(e => {
         e.onclick = () => {
             let dropDownMenu = e.querySelector('.dropdown-menu')
-
-            // TODO: rewrite
-            if (dropDownMenu.style.display === 'none')
-                dropDownMenu.style.display = 'block'
-            else
-                dropDownMenu.style.display = 'none'
+            let display = dropDownMenu.style.display
+            dropDownMenu.style.display = (display === 'none') ? 'block' : 'none'
         }
     })
 }
