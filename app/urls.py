@@ -12,7 +12,7 @@ urlpatterns = [
     path("admin/", include(wagtailadmin_urls)),
     path("dish/", include(dish_urls)),
     path("order/", include(order_urls), name='order'),
-    path("", include(menu_urls)),
+    path("", include(menu_urls), name='menu'),
 ]
 
 
