@@ -1,7 +1,6 @@
 from django.db import models
 
 from django.db import models
-from django.db.models import Q
 from django.urls import reverse
 from django.utils.text import slugify
 
@@ -58,6 +57,9 @@ class Dish(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
+        self.name = self.name[0].upper() + self.name[1:]
+        self.description = self.description[0].upper() + self.description[1:]
+
         self.slug = slugify(translit(self.name, 'ru', reversed=True))
         super().save(*args, **kwargs)
 
@@ -67,4 +69,3 @@ class Dish(models.Model):
     class Meta:
         verbose_name = 'Блюдо'
         verbose_name_plural = 'Блюда'
-        
