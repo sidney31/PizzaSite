@@ -1,84 +1,49 @@
 {% extends 'base.html' %}
 {% load wagtailimages_tags wagtailcore_tags %}
 
-{% block header %}
-    <div class="dropdown">
-        <a class='text-decoration-none'>
-            <p class="bold nav-link me-2 mb-0 text">
-                Меню
-                <i class="bi bi-caret-down dropdown-down"></i>
-            </p>
-        </a>
-        <ul class="dropdown-menu">
-            {% for category in categories %}
-                <li>
-                    <a class="dropdown-item" href="#{{ category }}">
-                        {{ category.name }}
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-
-    {% for item in header %}
-        {% if item.type == 'L' %}
-            <li><a href="{% pageurl item.page %}" class="bold nav-link me-2 text">{{ item.title }}</a></li>
-        {% elif item.type == 'D' %}
-            <div class="dropdown">
-                <a class='text-decoration-none'>
-                    <p class="bold nav-link me-2 mb-0 text">
-                        {{ item.title }}
-                        <i class="bi bi-caret-down dropdown-down"></i>
-                    </p>
-                </a>
-                <ul class="dropdown-menu">
-                    {% for item in item.drop_down_item.all %}
-                        <li><a class="dropdown-item" href="{% pageurl item.page %}">{{ item.title }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
-    {% endfor %}
-{% endblock %}
-
 {% block content %}
-    <div class="content">
-        <div class="container-lg">
-            <div class="row">
-                {% for category in categories %}
-                    <p class="d-flex flex-row-reverse justify-content-end">
-                        <a class="pseudo-anchor bold fs-3 hover-decoration"
-                           href="#{{ category }}">
-                            {{ category }}
-                        </a>
-                        <i class="anchor-hash fs-3 bi bi-hash"></i>
-                        <a id="{{ category }}" class="anchor"></a>
-                    </p>
+    <div class="row">
+        {% for category in categories %}
+            <p class="d-flex flex-row-reverse justify-content-end">
+                <a class="pseudo-anchor bold fs-3 hover-decoration"
+                   href="#{{ category }}">
+                    {{ category }}
+                </a>
+                <i class="anchor-hash fs-3 bi bi-hash"></i>
+                <a id="{{ category }}" class="anchor"></a>
+            </p>
 
-                    {% for dish in category.get_dish_list %}
-                        <div class="col-xl-4 col-md-6 d-flex justify-content-center"#}
-                             onclick="document.location.href='{{ dish.get_absolute_url }}'">
-                            <div class="card my-3" style="width: 18rem;">
-                                <div class="card-img-top">
-                                    {% image dish.image original as image %}
-                                    {% if image %}
-                                        <img src="{{ image.url }}" alt="{{ dish.name }}">
-                                    {% else %}
-                                        <p class="text-center bold position-relative top-50 translate-middle-y">
-                                            Изображение отсутствует</p>
-                                    {% endif %}
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title fs-4">{{ dish.price }} ₽</h5>
-                                    <b class="card-subtitle">{{ dish.name }}</b>
-                                    <p class="card-text">{{ dish.description }}</p>
-                                    <a href="#" class="w-100 btn btn-buy">Добавить</a>
-                                </div>
-                            </div>
+            {% for dish in category.get_dish_list %}
+                <div class="col-xl-4 col-md-6 d-flex justify-content-center">
+                    <div class="card my-3" style="width: 18rem;">
+                        <div class="h-85 position-absolute w-100"
+                             onclick="document.location.href='{{ dish.get_absolute_url }}'"></div>
+                        <div class="card-img-top">
+                            {% image dish.image original as image %}
+                            {% if image %}
+                                <img src="{{ image.url }}" alt="{{ dish.name }}">
+                            {% else %}
+                                <p class="text-center bold position-relative top-50 translate-middle-y m-0">
+                                    Изображение отсутствует
+                                </p>
+                            {% endif %}
                         </div>
-                    {% endfor %}
-                {% endfor %}
-            </div>
-        </div>
+                        <form class="card-body">
+                            <h5 class="card-title fs-4">{{ dish.price }} ₽</h5>
+                            <b class="card-subtitle">{{ dish.name }}</b>
+                            <p class="card-text">{{ dish.description }}</p>
+                            {% if dish_id in baskets %}
+                                В корзине
+                            {% else %}
+                                <a href="{% url 'order:add_dish_to_basket' dish.id %}"
+                                   class="w-100 btn btn-buy">Добавить</a>
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
     </div>
+    
+    
 {% endblock %}

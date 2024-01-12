@@ -1,9 +1,15 @@
 .square-image {
     aspect-ratio: 1 / 1;
     height: auto;
-    max-width: 500px;
+    max-width: 500px !important;
+    padding: 0 !important;
     border-radius: 15px;
-    margin: 10px;
+    background: #f6f6f6;
+    margin: 0 auto;
+}
+
+.square-image img {
+    border-radius: inherit;
 }
 
 #backToMenu {
@@ -22,6 +28,10 @@
     }
 
     .square-image {
-        max-width: 95%;
+        margin: 0 0 20px 0 !important;
     }
+}
+
+.bth:active {
+    border: none !important;
 }

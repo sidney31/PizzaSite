@@ -1,0 +1,60 @@
+{% load wagtailcore_tags %}
+
+<nav class="navbar navbar-expand-lg fade-navbar fixed-top">
+    <div class="container-lg flex-row-reverse">
+        <button class="btn text-end nav-link text-white" onclick="document.location.href='{% url 'order:index' %}'">
+            <a class="bold d-flex flex-direction-row gap-2 text-white basket-button text-decoration-none">
+                <p class="m-0">Заказ</p>
+                <div class="bi bi-bag"></div>
+            </a>
+            <p class="fs-6 thin m-0 p-0">({{ basket.total_price }}₽)</p>
+        </button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Переключатель навигации">
+            <i class="bi bi-list"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <div class="dropdown">
+                    <a class='text-decoration-none'>
+                        <p class="bold nav-link me-2 mb-0 text">
+                            Меню
+                            <i class="bi bi-caret-down dropdown-down"></i>
+                        </p>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% for category in categories %}
+                            <li>
+                                <a class="dropdown-item" href="{% url 'menu' %}#{{ category }}">
+                                    {{ category.name }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                {% for item in header %}
+                    {% if item.type == 'L' %}
+                        <li><a href="{% pageurl item.page %}" class="bold nav-link me-2 text">{{ item.title }}</a>
+                        </li>
+                    {% elif item.type == 'D' %}
+                        <div class="dropdown">
+                            <a class='text-decoration-none'>
+                                <p class="bold nav-link me-2 mb-0 text">
+                                    {{ item.title }}
+                                    <i class="bi bi-caret-down dropdown-down"></i>
+                                </p>
+                            </a>
+                            <ul class="dropdown-menu">
+                                {% for item in item.drop_down_item.all %}
+                                    <li><a class="dropdown-item" href="{% pageurl item.page %}">{{ item.title }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</nav>

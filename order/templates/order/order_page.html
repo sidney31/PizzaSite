@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+    {% if not DishesInBasket %}
+        <p class="fs-2 text-center">Здесь будут отображаться блюда, добавленные в заказ</p>
+    {% else %}
+        {% for DishInBasket in DishesInBasket %}
+            <div id="order_item" class="">
+                <div class="row align-items-center">
+                    <div class="col-8">
+                        <p class="mx-2 my-0">
+                            <a class="link-decoration-hover" href="{{ DishInBasket.dish.get_absolute_url }}">
+                                {{ DishInBasket.dish }}
+                            </a>
+                            ({{ DishInBasket.quantity }} ед.)
+                        </p>
+                    </div>
+                    <div class="col-2 ps-0">
+                        <p class="mx-2 my-0 ms-0">
+                            {{ DishInBasket.dish.price }}₽
+                        </p>
+                    </div>
+                    <div class="col-2 text-end p-0 pe-2">
+                        <a class="btn" href="{% url 'order:remove_dish_from_basket' DishInBasket.dish.id %}">
+                            <i class="bi bi-x-lg"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <hr>
+        <div class="row align-items-center bold">
+            <div id="totalPrice" class="col-8">
+                <p class="fs-4 ms-2">Итого:</p>
+            </div>
+            <div class="col-4 p-0 pe-2 text-start">
+                <p class="fs-4">{{ basket.total_price }}₽</p>
+            </div>
+        </div>
+
+        <button class="btn btn-buy text-center px-4 py-2 mt-3 fs-5">
+            Перейти к оплате
+        </button>
+    {% endif %}
+
+{% endblock %}
