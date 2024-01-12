@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load wagtailimages_tags wagtailcore_tags %}
+{% load wagtailimages_tags wagtailcore_tags basket_tags %}
 
 {% block content %}
     <div class="row">
@@ -32,18 +32,28 @@
                             <h5 class="card-title fs-4">{{ dish.price }} ₽</h5>
                             <b class="card-subtitle">{{ dish.name }}</b>
                             <p class="card-text">{{ dish.description }}</p>
-                            {% if dish_id in baskets %}
-                                В корзине
+                            {% get_quantity_tag dish.id as quantity %}
+                            {% if quantity.quantity > 0 %}
+                                <p class="bold">
+                                    <a href="{% url 'order:remove_dish_from_basket' dish.id %}" class="btn">
+                                        <i class="bi bi-dash-lg"></i>
+                                    </a>
+                                    {{ quantity.quantity }}
+                                    <a href="{% url 'order:add_dish_to_basket' dish.id %}" class="btn">
+                                        <i class="bi bi-plus-lg"></i>
+                                    </a>
+                                </p>
                             {% else %}
                                 <a href="{% url 'order:add_dish_to_basket' dish.id %}"
                                    class="w-100 btn btn-buy">Добавить</a>
                             {% endif %}
+
                         </form>
                     </div>
                 </div>
             {% endfor %}
         {% endfor %}
     </div>
-    
-    
+
+
 {% endblock %}
