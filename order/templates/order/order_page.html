@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load wagtailcore_tags %}
+{% load basket_tags %}
 
 {% block content %}
     {% if not DishesInBasket %}
@@ -9,16 +10,33 @@
             <div id="order_item" class="">
                 <div class="row align-items-center">
                     <div class="col-8">
-                        <p class="mx-2 my-0">
-                            <a class="link-decoration-hover" href="{{ DishInBasket.dish.get_absolute_url }}">
-                                {{ DishInBasket.dish }}
-                            </a>
-                            ({{ DishInBasket.quantity }} ед.)
-                        </p>
+                        <div class="row">
+                            <p class="mx-2 my-0">
+                                <a class="link-decoration-hover" href="{{ DishInBasket.dish.get_absolute_url }}">
+                                    {{ DishInBasket.dish }}
+                                </a>
+                            </p>
+                        </div>
+                        <div class="row">
+                            <p class="mx-2 my-0">
+                                <a href="{% url 'order:remove_dish_from_basket' DishInBasket.dish.id %}" class="btn">
+                                    <i class="bi bi-dash-lg"></i>
+                                </a>
+                                {% get_quantity_tag DishInBasket.dish.id as quantity %}
+                                {{ quantity.quantity }}
+                                <a href="{% url 'order:add_dish_to_basket' DishInBasket.dish.id %}" class="btn">
+                                    <i class="bi bi-plus-lg"></i>
+                                </a>
+                            </p>
+                        </div>
                     </div>
                     <div class="col-2 ps-0">
                         <p class="mx-2 my-0 ms-0">
-                            {{ DishInBasket.dish.price }}₽
+                            {% if quantity.quantity == 1 %}
+                                {{ DishInBasket.dish.price }}₽
+                            {% else %}
+                                {{ DishInBasket.dish.price }}₽ x {{ quantity.quantity }}
+                            {% endif %}
                         </p>
                     </div>
                     <div class="col-2 text-end p-0 pe-2">

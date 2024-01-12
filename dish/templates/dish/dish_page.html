@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
-{% load static %}
-{% load wagtailimages_tags %}
+{% load static wagtailimages_tags basket_tags %}
 
 {% block static %}
-	<link rel="stylesheet" href="{% static '/css/dish_page.css' %}">
+    <link rel="stylesheet" href="{% static '/css/dish_page.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -40,7 +39,21 @@
                 {{ dishes.price }} ₽
             </p>
 
-            <a href="" class="btn btn-buy">Добавить</a>
+            {% get_quantity_tag dishes.id as quantity %}
+            {% if quantity.quantity > 0 %}
+                <p class="bold">
+                    <a href="{% url 'order:remove_dish_from_basket' dishes.id %}" class="btn">
+                        <i class="bi bi-dash-lg"></i>
+                    </a>
+                    {{ quantity.quantity }}
+                    <a href="{% url 'order:add_dish_to_basket' dishes.id %}" class="btn">
+                        <i class="bi bi-plus-lg"></i>
+                    </a>
+                </p>
+            {% else %}
+                <a href="{% url 'order:add_dish_to_basket' dishes.id %}"
+                   class="btn btn-buy">Добавить</a>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
