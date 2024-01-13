@@ -26,9 +26,8 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 INSTALLED_APPS = [
     "menu",
     "dish",
-    "order",
     "search",
-
+    "cart",
     
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
@@ -172,3 +171,10 @@ WAGTAILADMIN_BASE_URL = "http://example.com"
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 WAGTAIL_ALLOW_UNICODE_SLUGS = False
+
+CART_SESSION_ID = "cart"
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_AGE = 300
+

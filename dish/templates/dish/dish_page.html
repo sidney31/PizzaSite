@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static wagtailimages_tags basket_tags %}
+{% load static wagtailimages_tags cart_tags %}
 
 {% block static %}
     <link rel="stylesheet" href="{% static '/css/dish_page.css' %}">
@@ -17,10 +17,10 @@
     </button>
     <div class="wrapper row">
         <div class="col-lg-12 col-xl-6">
-            {% image dishes.image original as image %}
+            {% image dish.image original as image %}
             <div class="square-image mb-md-5">
                 {% if image %}
-                    <img src="{{ image.url }}" alt="{{ dishes.name }}">
+                    <img src="{{ image.url }}" alt="{{ dish.name }}">
                 {% else %}
                     <p class="text-center bold position-relative top-50 translate-middle-y m-0">
                         Изображение отсутствует
@@ -30,28 +30,28 @@
         </div>
         <div class="col-lg-12 col-xl-6">
             <p class="bold fs-1">
-                {{ dishes.name }}
+                {{ dish.name }}
             </p>
             <p class="fs-4 me-md-4">
-                {{ dishes.description }}
+                {{ dish.description }}
             </p>
             <p class="bold fs-2">
-                {{ dishes.price }} ₽
+                {{ dish.price }} ₽
             </p>
 
-            {% get_quantity_tag dishes.id as quantity %}
+            {% get_quantity dish.id as quantity %}
             {% if quantity.quantity > 0 %}
                 <p class="bold">
-                    <a href="{% url 'order:remove_dish_from_basket' dishes.id %}" class="btn">
+                    <a href="{% url 'cart:cart_remove' dish.id 1 %}" class="btn">
                         <i class="bi bi-dash-lg"></i>
                     </a>
                     {{ quantity.quantity }}
-                    <a href="{% url 'order:add_dish_to_basket' dishes.id %}" class="btn">
+                    <a href="{% url 'cart:cart_add' dish.id %}" class="btn">
                         <i class="bi bi-plus-lg"></i>
                     </a>
                 </p>
             {% else %}
-                <a href="{% url 'order:add_dish_to_basket' dishes.id %}"
+                <a href="{% url 'cart:cart_add' dish.id %}"
                    class="btn btn-buy">Добавить</a>
             {% endif %}
         </div>

@@ -6,12 +6,12 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
 from dish import urls as dish_urls
 from menu import urls as menu_urls
-from order import urls as order_urls
+from cart import urls as cart_urls
 
 urlpatterns = [
     path("admin/", include(wagtailadmin_urls)),
     path("dish/", include(dish_urls)),
-    path("order/", include(order_urls), name='order'),
+    path("cart/", include(cart_urls), name='cart'),
     path("", include(menu_urls), name='menu'),
 ]
 
