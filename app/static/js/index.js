@@ -1,26 +1,28 @@
-if (document.querySelector("header")) {
+import './jquery-3.7.1.min.js'
+
+if ($("header")) {
     //header animate
     let scrollPosition = 0;
-    window.addEventListener('scroll', () => {
-        let navbar = document.querySelector(".fade-navbar");
+    $(window).scroll(() => {
+        let navbar = $(".fade-navbar");
 
-        if (window.scrollY > scrollPosition) {
-            navbar.style.transform = "translateY(-100px)";
-        } else {
-            navbar.style.transform = "translateY(0)";
-        }
-        scrollPosition = window.scrollY;
+        if ($(window).scrollTop() > scrollPosition)
+            navbar.css("translateY", "-100px");
+        else
+            navbar.css("translateY", "0");
+
+        scrollPosition = $(window).scrollTop()
     });
 }
 
 //dropdown for mobile
 if (window.matchMedia("(max-width: 992px)").matches) {
-    let dropDown = document.querySelectorAll('.dropdown')
-    dropDown.forEach(e => {
+    $('.dropdown').each((i, e) => {
         e.onclick = () => {
-            let dropDownMenu = e.querySelector('.dropdown-menu')
-            let display = dropDownMenu.style.display
-            dropDownMenu.style.display = (display === 'none') ? 'block' : 'none'
+            let dropDownMenu = $('.dropdown-menu')
+            let display = dropDownMenu.css("display")
+            let newDisplay = (display === 'none') ? 'block' : 'none'
+            dropDownMenu.css("display", newDisplay)
         }
     })
 }

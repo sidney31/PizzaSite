@@ -9,9 +9,9 @@ def index(request):
 
 def get_dish_info(request, dish_slug):
     dish = get_object_or_404(Dish, slug=dish_slug)
-    basket = Cart(request)
+    cart = Cart(request)
     context = {
         'dish': dish,
-        'basket': basket,
+        'cart': cart,
     }
     return render(request, 'dish/dish_page.html', context)
