@@ -1,0 +1,14 @@
+{
+  "name": "pizzasite",
+  "version": "1.0.0",
+  "description": "![image1](https://github.com/sidney31/PizzaSite/assets/100060433/94614127-02ba-4df6-8f45-9996a582b11f)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.7.1"
+  }
+}
