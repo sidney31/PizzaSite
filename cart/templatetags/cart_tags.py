@@ -8,7 +8,6 @@ register = template.Library()
 def get_quantity(context, dish_id):
     cart = Cart(context['request'])
     quantity = cart.get_quantity(dish_id)
-    print(dish_id, quantity)
     return {
         'request': context['request'],
         'quantity': quantity,

@@ -32,22 +32,28 @@
                             <h5 class="card-title fs-4">{{ dish.price }} ₽</h5>
                             <b class="card-subtitle">{{ dish.name }}</b>
                             <p class="card-text">{{ dish.description }}</p>
-                            {% get_quantity dish.id as quantity %}
-                            {% if quantity.quantity > 0 %}
-                                <p class="bold">
-                                    <a href="{% url 'cart:cart_remove' dish.id 1 %}" class="btn">
-                                        <i class="bi bi-dash-lg"></i>
+                            <div class="in-cart-button" id="dish_{{ dish.id }}">
+                                {% get_quantity dish.id as quantity %}
+                                {% if quantity.quantity > 0 %}
+                                    <p class="bold">
+                                        <a href="{% url 'cart:cart_remove' dish.id 1 %}"
+                                           class="btn" onclick="ajax({{ dish.id }})">
+                                            <i class="bi bi-dash-lg"></i>
+                                        </a>
+                                        <a class="text-decoration-none" id="quantity">
+                                            {{ quantity.quantity }}
+                                        </a>
+                                        <a class="btn ajax-post" onclick="ajax_query( {{ dish.id }})">
+                                            <i class="bi bi-plus-lg"></i>
+                                        </a>
+                                    </p>
+                                {% else %}
+                                    <a class="w-100 btn btn-buy"
+                                       onclick="ajax_query( {{ dish.id }} )">
+                                        Добавить
                                     </a>
-                                    {{ quantity.quantity }}
-                                    <a href="{% url 'cart:cart_add' dish.id %}" class="btn">
-                                        <i class="bi bi-plus-lg"></i>
-                                    </a>
-                                </p>
-                            {% else %}
-                                <a href="{% url 'cart:cart_add' dish.id %}"
-                                   class="w-100 btn btn-buy">Добавить</a>
-                            {% endif %}
-
+                                {% endif %}
+                            </div>
                         </form>
                     </div>
                 </div>
