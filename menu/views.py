@@ -5,6 +5,7 @@ from cart.cart import Cart
 
 
 def index(request):
+    print(Cart(request).get_total_price())
     context = {
         'categories': Category.objects.all(),
         'header': ItemOfHeader.objects.all(),

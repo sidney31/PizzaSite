@@ -16,7 +16,7 @@
             {% for dish in category.get_dish_list %}
                 <div class="col-xl-4 col-md-6 d-flex justify-content-center">
                     <div class="card my-3" style="width: 18rem;">
-                        <div class="h-85 position-absolute w-100"
+                        <div class="h-80 position-absolute w-100"
                              onclick="document.location.href='{{ dish.get_absolute_url }}'"></div>
                         <div class="card-img-top">
                             {% image dish.image original as image %}
@@ -34,21 +34,36 @@
                             <p class="card-text">{{ dish.description }}</p>
                             <div class="in-cart-button" id="dish_{{ dish.id }}">
                                 {% get_quantity dish.id as quantity %}
+
                                 {% if quantity.quantity > 0 %}
-                                    <p class="bold">
-                                        <a href="{% url 'cart:cart_remove' dish.id 1 %}"
-                                           class="btn" onclick="ajax({{ dish.id }})">
-                                            <i class="bi bi-dash-lg"></i>
-                                        </a>
-                                        <a class="text-decoration-none" id="quantity">
-                                            {{ quantity.quantity }}
-                                        </a>
-                                        <a class="btn ajax-post" onclick="ajax_query( {{ dish.id }})">
-                                            <i class="bi bi-plus-lg"></i>
-                                        </a>
-                                    </p>
+                                    <p class="bold" id="edit_cart">
+                                        {% else %}
+                                    <p class="bold d-none" id="edit_cart">
+                                {% endif %}
+
+                                    <a href="{% url 'cart:index' %}" class="btn btn-buy">
+                                        К заказу
+                                    </a>
+                                    <a
+                                       class="btn" onclick="ajax_query({{ dish.id}}, 1)">
+                                        <i class="bi bi-dash-lg"></i>
+                                    </a>
+                                    <a class="text-decoration-none" id="quantity">
+                                        {{ quantity.quantity }}
+                                    </a>
+                                    <a
+                                       class="btn" onclick="ajax_query({{ dish.id }})">
+                                        <i class="bi bi-plus-lg"></i>
+                                    </a>
+                                </p>
+
+                                {% if quantity.quantity == 0 %}
+                                    <a class="w-100 btn btn-buy" id="in_cart"
+                                       onclick="ajax_query( {{ dish.id }} )">
+                                        Добавить
+                                    </a>
                                 {% else %}
-                                    <a class="w-100 btn btn-buy"
+                                    <a class="w-100 btn btn-buy d-none" id="in_cart"
                                        onclick="ajax_query( {{ dish.id }} )">
                                         Добавить
                                     </a>

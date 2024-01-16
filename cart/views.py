@@ -9,7 +9,12 @@ def cart_add(request, dish_id):
     dish = get_object_or_404(Dish, id=dish_id)
     cart.add(dish)
 
-    return JsonResponse({'cart': cart.cart})
+    data = {
+        'cart': cart.cart,
+        'total_price': cart.get_total_price()
+    }
+
+    return JsonResponse(data)
 
 
 def cart_remove(request, dish_id, quantity=0):
@@ -17,13 +22,14 @@ def cart_remove(request, dish_id, quantity=0):
     dish = get_object_or_404(Dish, id=dish_id)
     cart.remove(dish, quantity)
 
-    return JsonResponse({'cart': cart})
+    data = {
+        'cart': cart.cart,
+        'total_price': cart.get_total_price()
+    }
+
+    return JsonResponse(data)
 
 
 def index(request):
-    cart = Cart(request)
-    return render(
-        request,
-        'cart/cart_page.html',
-        {'cart': cart}
-    )
+    data = {'cart': Cart(request)}
+    return render(request, 'cart/cart_page.html', data)

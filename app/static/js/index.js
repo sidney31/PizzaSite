@@ -1,5 +1,6 @@
 import './jquery-3.7.1.min.js'
 
+
 if ($("header")) {
     let scrollPosition = 0;
     $(window).scroll(() => {
@@ -32,31 +33,42 @@ if (window.matchMedia("(max-width: 992px)").matches) {
     })
 }
 
-window.ajax_query = function (dish_id) {
+window.ajax_query = function (dish_id, quantity = 0) {
+
+    let url = `cart/add/${dish_id}/`
+    if (quantity !== 0)
+        url = `cart/remove/${dish_id}/${quantity}`
+
     $.ajax({
-        type: "get",
-        url: `cart/add/${dish_id}/`,
+        type: 'get',
+        url: url,
         success: function (data) {
             update_values(data, dish_id)
         }
     });
-    return false;
 }
 
 function update_values(data, dish_id) {
-    let dish = $(`#dish_${dish_id}`)[0]
     let cart = data['cart']
-    let total_price = get_total_price(cart)
+    let total_price = data['total_price']
 
-    $('#total-price').text(`(${cart['total_price']}₽)`)
-}
+    let quantity_int = 0;
 
-function get_total_price(cart) {
-    let json = JSON.stringify(cart, null, 2)
+    if (cart[dish_id])
+        quantity_int = cart[dish_id]['quantity']
 
+    $('#total-price').text(`(${total_price}₽)`)
+    let quantity_block = $(`#dish_${dish_id} #quantity`).get(0)
+    $(quantity_block).text(quantity_int)
 
-    // cart.toJSON.forEach((k, v) => {
-    //     console.log(`k:${k} - v:${v}`)
-    // })
-    return 10
+    let editCart = $(`#dish_${dish_id} #edit_cart`).get(0)
+    let inCart = $(`#dish_${dish_id} #in_cart`).get(0)
+
+    if (quantity_int > 0) {
+        $(editCart).removeClass('d-none')
+        $(inCart).addClass('d-none')
+    } else {
+        $(editCart).addClass('d-none')
+        $(inCart).removeClass('d-none')
+    }
 }

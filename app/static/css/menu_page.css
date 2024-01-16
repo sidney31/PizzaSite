@@ -142,8 +142,8 @@ img {
     visibility: hidden;
 }
 
-.h-85{
-    height: 85%;
+.h-80{
+    height: 80%;
 }
 
 #order_item{
@@ -160,4 +160,8 @@ img {
 .link-decoration-hover:hover{
     color: #6e6e6e !important;
     text-decoration: underline 1px;
+}
+
+.in-cart-button{
+    height: 50px;
 }
